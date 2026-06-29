@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DataCopilot</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="7" fill="#6366f1"/>
+      <path d="M7 20L12 13L16 17L20 9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="20" cy="9" r="2" fill="#a5b4fc"/>
+    </svg>
+    DataCopilot
+  </div>
+  <div id="dataset-meta" class="header-meta"></div>
+</header>
+
+<main>
+
+  <!-- Upload -->
+  <section id="upload-panel" class="card">
+    <h2>Upload your dataset</h2>
+    <p class="subtitle">CSV, Excel, JSON or Parquet &mdash; up to 50 MB</p>
+    <div class="drop-zone" id="drop-zone">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.6">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      <p>Drag &amp; drop or <label for="file-input" class="link">browse</label></p>
+      <input type="file" id="file-input" accept=".csv,.xlsx,.xls,.json,.parquet" hidden/>
+    </div>
+    <div id="upload-status" class="status hidden"></div>
+  </section>
+
+  <!-- Schema -->
+  <section id="schema-panel" class="card hidden">
+    <div class="row-between">
+      <h2>Dataset loaded</h2>
+      <button id="change-btn" class="btn-ghost">Change file</button>
+    </div>
+    <div id="schema-stats" class="chips-row"></div>
+    <div id="preview-wrap" class="table-wrap"></div>
+    <details>
+      <summary>Full schema</summary>
+      <pre id="schema-text"></pre>
+    </details>
+  </section>
+
+  <!-- Chat -->
+  <section id="chat-panel" class="hidden">
+    <div id="messages"></div>
+    <div class="input-bar">
+      <textarea id="q-input" rows="1" placeholder="Ask anything about your data…"></textarea>
+      <button id="send-btn" class="btn-primary" disabled>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+    <div id="chips" class="chips-row"></div>
+  </section>
+
+</main>
+
+<div id="overlay" class="overlay hidden">
+  <div class="spinner"></div>
+  <p>Analyzing&hellip;</p>
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
