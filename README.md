@@ -5,8 +5,7 @@
 [![AI Integration](https://img.shields.io/badge/AI-Anthropic%20Claude-CC9900.svg)](https://www.anthropic.com/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-<div><img width="900" src="https://banner2.cleanpng.com/cb4/nqm/nns/ahb4t4h0b.webp" />
-" alt="Logo"/></div>
+<div><img width="900" src="https://banner2.cleanpng.com/cb4/nqm/nns/ahb4t4h0b.webp" alt="Logo"/></div>
 
 **DataCopilot** is an intelligent, web-based data assistant that lets you interact with your datasets using natural language. Powered by Anthropic's Claude API, it translates plain-English questions into Python or Pandas code, executes it in a secure sandboxed environment, and returns the results—all through a clean, single-page web interface.
 
