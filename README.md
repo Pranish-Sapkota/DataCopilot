@@ -224,5 +224,5 @@ See the [LICENSE](LICENSE) file for full details.
 ---
 
 <p align="center">
-  Built with ❤️ using <a href="https://docs.mistral.ai/">Mistral AI</a> and <a href="https://flask.palletsprojects.com/">Flask</a>.
+  Built with ❤️ by Pranish Sapkota using <a href="https://docs.mistral.ai/">Mistral AI</a> and <a href="https://flask.palletsprojects.com/">Flask</a>.
 </p>
