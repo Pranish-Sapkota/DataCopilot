@@ -1,146 +1,228 @@
-# 📊 DataCopilot
+# DataCopilot
 
-[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/backend-Flask-000000.svg?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![AI Integration](https://img.shields.io/badge/AI-Anthropic%20Claude-CC9900.svg)](https://www.anthropic.com/)
-[![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9%2B-blue" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-green" alt="License: GPL-3.0">
+  <img src="https://img.shields.io/badge/AI-Mistral%20API-purple" alt="AI: Mistral API">
+  <img src="https://img.shields.io/github/stars/Pranish-Sapkota/DataCopilot?style=social" alt="GitHub Stars">
+</p>
 
-# <span style="color: #db7226;">&lt;DataCopilot/&gt;</span>
+<p align="center">
+  <b>AI-Powered Data Analysis Assistant</b><br>
+  Upload your dataset and ask questions in plain English — DataCopilot writes and executes Python analysis code on the fly, delivering charts, computed results, and data-driven insights through an intuitive chat interface.
+</p>
 
-**DataCopilot** is an intelligent, web-based data assistant that lets you interact with your datasets using natural language. Powered by Anthropic's Claude API, it translates plain-English questions into Python or Pandas code, executes it in a secure sandboxed environment, and returns the results—all through a clean, single-page web interface.
+---
 
-Whether you're exploring a CSV, cleaning messy data, or generating quick statistics, DataCopilot acts as your copilot for data analysis.
+## Table of Contents
 
-## ✨ Features
+- [Overview](#overview)
+- [Features](#features)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Supported Analysis Types](#supported-analysis-types)
+- [Project Structure](#project-structure)
+- [Security](#security)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
 
-- **Natural Language Querying** – Ask questions in plain English and get answers from your data.
-- **AI-Powered Code Generation** – Uses Anthropic Claude to generate accurate Python/Pandas code.
-- **Safe Code Execution** – Runs all generated code in an isolated, sandboxed environment to protect your system.
-- **Interactive Web UI** – Clean, responsive single-page interface built with Flask, HTML, CSS, and JavaScript.
-- **Dynamic Schema Understanding** – Automatically builds and understands your DataFrame structure for precise query handling.
+---
 
-## 🧰 Tech Stack
+## Overview
 
-| Layer | Technology |
-|-------|------------|
-| Backend | Python 3, Flask |
-| AI Integration | Anthropic Claude API |
-| Data Processing | Pandas |
-| Code Execution | Sandboxed Python runner |
-| Frontend | HTML, CSS, JavaScript |
-| License | GPL-3.0 |
+DataCopilot leverages the [Mistral AI API](https://docs.mistral.ai/) to turn natural language questions into executable Python data analysis. Built on a lightweight Flask backend with a clean vanilla HTML/CSS/JS frontend, it provides an interactive environment for exploring datasets without writing code.
 
-## 📁 Project Structure
+**Live Repository:** [github.com/Pranish-Sapkota/DataCopilot](https://github.com/Pranish-Sapkota/DataCopilot)
 
-```
-datacopilot/
-├── app.py            # Flask entry point & routes
-├── copilot.py        # Anthropic API integration & prompt logic
-├── executor.py       # Safe sandboxed code runner
-├── schema.py         # DataFrame schema builder
-├── requirements.txt  # Python dependencies
-├── templates/
-│   └── index.html    # Single-page UI
-└── static/
-    ├── css/style.css
-    └── js/app.js
-```
+---
 
-## 🚀 Getting Started
+## Features
+
+- **Drag-and-Drop Upload** — Supports CSV, Excel (`.xlsx` / `.xls`), JSON, and Parquet files.
+- **Automatic Schema Detection** — Identifies column types, null counts, sample values, and numeric summaries instantly.
+- **Natural Language Q&A** — Ask questions about your data in plain English with full follow-up and contextual support.
+- **Auto-Generated Charts** — Produces distribution plots, comparisons, trends, correlations, rankings, and part-of-whole visualizations using Matplotlib and Seaborn.
+- **Sandboxed Execution** — All generated code runs in a restricted environment with dangerous imports and built-ins disabled.
+- **Conversation Memory** — Maintains session context so follow-up questions like *"now filter to 2023"* work seamlessly.
+
+---
+
+## Demo
+
+1. Upload your dataset.
+2. Review the auto-detected schema and preview.
+3. Ask questions in the chat.
+4. Receive explanations, charts, and insights instantly.
+
+A `sample_data.csv` file is included for quick testing.
+
+---
+
+## Installation
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- An [Anthropic API key](https://console.anthropic.com/)
+- Python 3.9 or higher
+- A [Mistral AI API key](https://console.mistral.ai/api-keys) (free tier available)
 
-### Installation
+### Steps
 
-1. **Clone the repository**
+```bash
+# Clone the repository
+git clone https://github.com/Pranish-Sapkota/DataCopilot.git
+cd DataCopilot
 
-   ```bash
-   git clone https://github.com/Pranish-Sapkota/DataCopilot.git
-   cd DataCopilot
-   ```
+# Create and activate a virtual environment
+# Windows:
+python -m venv venv
+venv\Scripts\activate
 
-2. **Create and activate a virtual environment** (recommended)
+# macOS / Linux:
+python3 -m venv venv
+source venv/bin/activate
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
-   ```
+# Install dependencies
+pip install -r requirements.txt
+```
 
-3. **Install dependencies**
+---
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Configuration
 
-4. **Set up your Anthropic API key**
+Create a `.env` file in the project root:
 
-   Create a `.env` file in the project root or set an environment variable:
+```env
+MISTRAL_API_KEY=your_mistral_api_key_here
+MISTRAL_MODEL=mistral-small-latest
+```
 
-   ```bash
-   export ANTHROPIC_API_KEY="your-api-key-here"
-   ```
+> **Important:** Do not add spaces around `=` and do not wrap values in quotes. Both will break the configuration.
 
-   Or add it to a `.env` file:
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `MISTRAL_API_KEY` | Yes | — | Your Mistral API key |
+| `MISTRAL_MODEL` | No | `mistral-small-latest` | Mistral model used for code generation |
+| `SECRET_KEY` | No | auto-generated | Flask session secret |
 
-   ```
-   ANTHROPIC_API_KEY=your-api-key-here
-   ```
+---
 
-### Running the Application
+## Usage
 
 ```bash
 python app.py
 ```
 
-Then open your browser and navigate to **http://localhost:5000**.
+Open [http://localhost:5000](http://localhost:5000) in your browser.
 
-## 🧪 Usage
+### Example Questions
 
-1. Upload or load your dataset (CSV format supported).
-2. Type a question in natural language — for example:
-   - *"What are the average values of each numeric column?"*
-   - *"Show me the top 10 rows sorted by column X."*
-   - *"How many missing values are in each column?"*
-3. DataCopilot generates the corresponding Python/Pandas code.
-4. The code is executed safely, and the results are displayed in the UI.
+- *"Show the distribution of Age"*
+- *"Compare average revenue by region"*
+- *"What's the trend in sales over time?"*
+- *"Plot a correlation heatmap"*
+- *"Top 10 customers by total spend"*
 
-## 🤝 Contributing
+Continue the conversation naturally:
 
-Contributions are welcome! Here's how you can help:
-
-1. **Fork the repository** and create your branch from `main`.
-2. **Make your changes** – whether it's a bug fix, new feature, or documentation improvement.
-3. **Test your changes** thoroughly.
-4. **Submit a pull request** with a clear description of what you've done.
-
-Please make sure to update the README or documentation accordingly if your changes introduce new behavior.
-
-## 🐛 Reporting Issues
-
-Found a bug or have a suggestion? Please [open an issue](https://github.com/Pranish-Sapkota/DataCopilot/issues) with the following information:
-
-- A clear and descriptive title.
-- Steps to reproduce the issue.
-- Expected vs. actual behavior.
-- Screenshots or code snippets if applicable.
-- Your environment (OS, Python version, browser, etc.).
-
-## 📄 License
-
-This project is licensed under the **GNU General Public License v3.0**. See the [LICENSE](LICENSE) file for the full text.
-
-## 🙏 Acknowledgements
-
-- [Anthropic](https://www.anthropic.com/) for providing the Claude API.
-- [Pandas](https://pandas.pydata.org/) for data manipulation.
-- [Flask](https://flask.palletsprojects.com/) for the lightweight web framework.
+- *"Make it a bar chart"*
+- *"Now filter to 2024 only"*
+- *"Add a trend line"*
 
 ---
 
-**Built with ❤️ by [Pranish Sapkota](https://github.com/Pranish-Sapkota)**
+## Supported Analysis Types
 
-    ├── css/style.css # Custom dashboard layout and theme styling
-    └── js/app.js     # Frontend state handler and API connector
+| Type | Example | Output |
+|------|---------|--------|
+| **Distribution** | *"Show the distribution of Age"* | Histogram with mean line |
+| **Comparison** | *"Compare sales by category"* | Sorted bar chart |
+| **Trend** | *"Revenue trend by month"* | Line chart over time |
+| **Relationship** | *"Does price affect rating?"* | Scatter plot with correlation |
+| **Correlation Matrix** | *"Show all correlations"* | Heatmap |
+| **Ranking** | *"Top 10 products by revenue"* | Horizontal bar chart |
+| **Part-of-Whole** | *"Sales breakdown by category"* | Pie or bar chart |
+| **Filtering** | *"Show only 2023 orders"* | Filtered analysis on any of the above |
+| **Pure Question** | *"What columns are in this dataset?"* | Text answer, no chart |
+
+---
+
+## Project Structure
+
+```
+DataCopilot/
+├── app.py                  # Flask application & API routes
+├── copilot.py              # Mistral API integration and prompt templates
+├── executor.py             # Sandboxed code execution engine
+├── schema.py               # Dataset schema extraction
+├── requirements.txt        # Python dependencies
+├── .env                    # API key & model configuration (not committed)
+├── sample_data.csv         # Example dataset for testing
+├── templates/
+│   └── index.html          # Single-page UI
+├── static/
+│   ├── css/style.css       # Application styling
+│   └── js/app.js           # Frontend logic
+├── uploads/                # Uploaded files (runtime, gitignored)
+└── charts/                 # Generated chart images (runtime, gitignored)
+```
+
+---
+
+## Security
+
+- **Sandboxed Execution:** Generated code executes inside a restricted `exec()` sandbox with a limited set of safe built-ins.
+- **Blocked Imports:** Imports such as `os`, `sys`, `subprocess`, and `shutil` are blocked, along with `open()`, `eval()`, `exec()`, and `compile()`.
+- **Temporary Storage:** Uploaded files are stored temporarily in `uploads/` and should be cleared periodically in production.
+- **API Key Protection:** The `.env` file must never be committed to version control.
+
+### Production Recommendations
+
+- Add user authentication
+- Run behind a reverse proxy (e.g., nginx or Caddy)
+- Configure HTTPS
+- Implement rate limiting
+
+---
+
+## Troubleshooting
+
+### `MISTRAL_API_KEY environment variable is not set`
+
+Confirm the `.env` file exists in the same directory as `app.py`, with no spaces around `=` and no quotes around the value.
+
+### `Mistral API error 401: Unauthorized`
+
+Your API key is invalid, expired, or was copied incorrectly. Generate a new key at [console.mistral.ai/api-keys](https://console.mistral.ai/api-keys).
+
+### Chart not appearing in chat
+
+Check that the `charts/` folder exists and is writable. Verify the generated code includes `plt.savefig(chart_path, ...)`.
+
+---
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request or open an Issue on the [GitHub repository](https://github.com/Pranish-Sapkota/DataCopilot).
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0**.
+
+See the [LICENSE](LICENSE) file for full details.
+
+---
+
+<p align="center">
+  Built with ❤️ using <a href="https://docs.mistral.ai/">Mistral AI</a> and <a href="https://flask.palletsprojects.com/">Flask</a>.
+</p>
